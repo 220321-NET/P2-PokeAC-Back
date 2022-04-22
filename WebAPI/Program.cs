@@ -19,7 +19,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<PACDBContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PACDB")));
-//builder.Services.AddScoped<IRepo>(ctx = new DataStorage(builder.))
+//builder.Services.AddScoped<IRepo, EFRepo>();
+//builder.Services.AddScoped<(b layer))
 //
 
 
