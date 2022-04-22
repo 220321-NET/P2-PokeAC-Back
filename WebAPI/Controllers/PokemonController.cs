@@ -2,18 +2,19 @@ using Microsoft.AspNetCore.Mvc;
 using DataLayer;
 using Models;
 
-namespace WebAPI.Controllers;
-
-[Route("[api/controller]")]
-[ApiController]
-public class PokemonContoller : ControllerBase
+namespace WebAPI.Controllers
 {
-    private readonly IRepo _dl;
-
-    public PokemonController( IRepo dl)
+    [Route("[api/controller]")]
+    [ApiController]
+    public class PokemonContoller : ControllerBase
     {
-        _dl = dl;
+        private readonly IRepo _dl;
+
+        public PokemonController(IRepo dl)
+        {
+            _dl = dl;
+        }
+
+
     }
-
-
 }
