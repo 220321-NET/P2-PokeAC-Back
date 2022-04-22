@@ -1,24 +1,19 @@
 using Microsoft.AspNetCore.Mvc;
 using DataLayer;
+using Models;
 
 namespace WebAPI.Controllers;
 
+[Route("[api/controller]")]
 [ApiController]
-[Route("[controller]")]
 public class PokemonContoller : ControllerBase
 {
     private readonly IRepo _dl;
-    private readonly ILogger<PokemonController> _logger;
 
-    public PokemonController(ILogger<PokemonController> logger, IRepo dl)
+    public PokemonController( IRepo dl)
     {
-        _logger = logger;
         _dl = dl;
     }
 
-    [HttpGet("GetRandomPokemonFromList")]
-    public string GetRandomPokemon()
-    {
-        return _dl.FindRandomPokemon();
-    }
+
 }
