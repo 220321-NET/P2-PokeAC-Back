@@ -9,55 +9,63 @@ public class DataStorage : IRepo
         _context = context;
     }
 
-    public Task AddToDex(User player, Pokemon pokemon)
+    public async Task AddToDex(User player, Pokemon pokemon)
     {
-        //adds a pokemon to the user's available pool, needs a proper query
-        throw new NotImplementedException();
-    }
+        Pokedex add = new Pokedex(player.id, pokemon.id);
+        _context.Pokedex.Add(add);
+        await _context.SaveChangesAsync();
 
-    public User CreateUser(User userToCreate)
+    }
+    public async Task<User> CreateUser(User userToCreate)
     {
         _context.Users.Add(userToCreate);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
         return userToCreate;
-        //throw new NotImplementedException();
+
     }
 
     public async Task<List<Pokemon>> GetAllPokemonAsync()
     {
         return await _context.Pokemon.ToListAsync();
-        //throw new NotImplementedException();
     }
 
-    public Task<List<User>> GetLeaderboardWinRate()
+    public async Task<List<User>> GetLeaderboardWinRate()
     {
-        //needs a proper query, grab players sorted by wins/matches
-        throw new NotImplementedException();
+        return await _context.Users
+            .FromSqlRaw("Select * from Users Order By (wins *1.0) /(matches * 1.0) desc")
+            .ToListAsync();
     }
 
-    public Task<List<User>> GetLeaderboardWins()
+    public async Task<List<User>> GetLeaderboardWins()
     {
-        //needs a proper query? grab users sorted by wins
-        throw new NotImplementedException();
+        return await _context.Users
+            .FromSqlRaw("Select * from Users Order By wins desc")
+            .ToListAsync();
     }
 
     public async Task<User> getUserAsync(User userToGet)
     {
         return await _context.Users.FirstOrDefaultAsync(user => userToGet.id == user.id);
         //someone make sure this is right and when they do delete this comment
-        throw new NotImplementedException();
     }
 
-    public Task<List<Pokemon>> GetUsersDex(User player)
+    public async Task<List<Pokemon>> GetUsersDex(User player)
     {
-        throw new NotImplementedException();
+        List<Pokedex> tempDex = await _context.Pokedex
+            .FromSqlRaw($"Select * from Pokedex where userId = {player.id}")
+            .ToListAsync();
+        List<Pokemon> userDex = new List<Pokemon>();
+        foreach (Pokedex p in tempDex){
+            userDex.Add(await _context.Pokemon.FirstOrDefaultAsync(poke => poke.id == p.id));
+        }
+        return userDex;
+        //someone make sure this is right and when they do delete this comment
     }
 
     public void UserLost(User loser)
     {
         _context.Users.Update(loser);
         _context.SaveChanges();
-        //throw new NotImplementedException();
     }
 
     public void UserTied(User player1, User player2)
@@ -65,14 +73,12 @@ public class DataStorage : IRepo
         _context.Users.Update(player1);
         _context.Users.Update(player2);
         _context.SaveChanges();
-        //throw new NotImplementedException();
     }
 
     public void UserWon(User winner)
     {
         _context.Users.Update(winner);
-        _context.SaveChanges();
-        //throw new NotImplementedException();
+        _context.SaveChanges();        
     }
 
 

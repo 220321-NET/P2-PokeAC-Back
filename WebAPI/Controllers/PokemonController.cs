@@ -27,7 +27,36 @@ namespace WebAPI.Controllers
             return await _dl.getUserAsync(user);
         }
 
+        [HttpGet("GetLeaderboard")]
+        public async Task<List<User>> GetLeaderboardWins()
+        {
+            return await _dl.GetLeaderboardWins();
+        }
 
+        [HttpGet("GetLeaderboardWinRate")]
+        public async Task<List<User>> GetLeaderboardWinRate()
+        {
+            return await _dl.GetLeaderboardWinRate();
+        }
 
+        [HttpPut("{id:int}")]
+        public void UserWon(User winner)
+        {
+            // eventually make this async?
+            // here to update the winner globally in the db
+            _dl.UserWon(winner);
+        }
+
+        [HttpPut("{id:int}")]
+        public void UserLost(User loser)
+        {
+            _dl.UserLost(loser);
+        }
+
+        [HttpPut("{id: int}")]
+        public void UserTied(User p1, User p2)
+        {
+            _dl.UserTied(p1, p2);
+        }
     }
 }
