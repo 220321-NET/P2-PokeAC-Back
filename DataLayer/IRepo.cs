@@ -2,16 +2,20 @@ namespace DataLayer;
 
 public interface IRepo
 {
-    Task<User> getUserAsync(User userToGet);    //login method
+    Task<User> getUserAsync(User userToGet);                           // login method
     Task<User> CreateUser(User userToCreate);
     Task<List<Pokemon>> GetAllPokemonAsync();
-    void UserWon(User winner);
-    void UserLost(User loser);
-    void UserTied(User player1, User player2);
+    Task UserWon(User winner);
+    Task UserLost(User loser);
+    Task UserTied(User player1, User player2);
     Task AddToDex(User player, Pokemon pokemon);
-    Task<List<Pokemon>> GetUsersDex(User player);
-    Task<List<User>> GetLeaderboardWins();
-    Task<List<User>> GetLeaderboardWinRate();
+    Task<List<Pokemon>> RemoveFromDex(User player, Pokemon pokemon);
+    Task RemoveAllFromDex(User player);                             // 
+    Task<List<Pokemon>> GetUsersDex(User player);                   // Gets list of Pokemon given player
+    Task<List<User>> GetLeaderboardWins();                          // Return users for leaderboard
+    Task<List<User>> GetLeaderboardWinRate();                       // Return win rate for leaderboard
+    Task DeleteUserSession(User user);                              // unimplemented
+    Task<Pokemon> getPokemonInfo(string pokemon);                   // given name, return Pokemon
 }
 
 //Pokemon CreatePokemon(Pokemon pkmToCreate);

@@ -45,7 +45,7 @@ public class DataStorage : IRepo
 
     public async Task<User> getUserAsync(User userToGet)
     {
-        return await _context.Users.FirstOrDefaultAsync(user => userToGet.id == user.id);
+        return await _context.Users.FirstOrDefaultAsync(user => userToGet.username == user.username && userToGet.password == user.password);
         //someone make sure this is right and when they do delete this comment
     }
 
@@ -55,30 +55,73 @@ public class DataStorage : IRepo
             .FromSqlRaw($"Select * from Pokedex where userId = {player.id}")
             .ToListAsync();
         List<Pokemon> userDex = new List<Pokemon>();
-        foreach (Pokedex p in tempDex){
+        foreach (Pokedex p in tempDex)
+        {
             userDex.Add(await _context.Pokemon.FirstOrDefaultAsync(poke => poke.id == p.id));
         }
         return userDex;
         //someone make sure this is right and when they do delete this comment
     }
 
-    public void UserLost(User loser)
+    public async Task RemoveAllFromDex(User player)
     {
-        _context.Users.Update(loser);
-        _context.SaveChanges();
+        await _context.Pokedex
+            .FromSqlRaw($"Delete from Pokedex where userId = {player.id}")
+            .ToListAsync();
     }
 
-    public void UserTied(User player1, User player2)
+    public async Task<List<Pokemon>> RemoveFromDex(User player, Pokemon pokemon)
+    {
+        List<Pokedex> tempDex = await _context.Pokedex
+            .FromSqlRaw($"Select * from Pokedex where userId = {player.id}")
+            .ToListAsync();
+        foreach (Pokedex p in tempDex)
+        {
+            //loop through to find the firs tone that matches the given player and pokemon id
+            if (p.userId == player.id && p.pokeID == pokemon.id)
+            {
+                _context.Remove(p);
+                await _context.SaveChangesAsync();
+                break;
+            }
+        }
+        List<Pokemon> userDex = new List<Pokemon>();
+        foreach (Pokedex p in tempDex)
+        {
+            userDex.Add(await _context.Pokemon.FirstOrDefaultAsync(poke => poke.id == p.id));
+        }
+        return userDex;
+    }
+
+    public async Task UserLost(User loser)
+    {
+        _context.Users.Update(loser);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task UserTied(User player1, User player2)
     {
         _context.Users.Update(player1);
         _context.Users.Update(player2);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 
-    public void UserWon(User winner)
+    
+
+    public async Task UserWon(User winner)
     {
         _context.Users.Update(winner);
-        _context.SaveChanges();        
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task DeleteUserSession(User user)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<Pokemon> getPokemonInfo(string pokemon)
+    {
+        return await _context.Pokemon.FirstOrDefaultAsync(poke => poke.name == pokemon);
     }
 
 

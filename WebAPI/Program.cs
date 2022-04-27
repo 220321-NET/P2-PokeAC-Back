@@ -13,14 +13,14 @@ builder.Host.UseSerilog(
 // Add services to the container.
 
 builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
-builder.Services.AddControllers();
+// builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<PACDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("PACDBSQL")));
 //builder.Services.AddDbContext<PACDBContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("PACDB")));
-//builder.Services.AddScoped<IRepo, EFRepo>();
+builder.Services.AddScoped<IRepo, DataStorage>();
 //builder.Services.AddScoped<(b layer))
 //
 
