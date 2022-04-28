@@ -16,9 +16,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("CreateUser/{userToCreate}")]
-        public ActionResult<User> Post([FromBody] User userToCreate)
+        public async Task<User> Post([FromQuery] User userToCreate)
         {
-            return Created("api/Users", _dl.CreateUser(userToCreate));
+            return await _dl.CreateUser(userToCreate);
         }
 
         [HttpGet("FindUser/{user}")]
@@ -39,11 +39,11 @@ namespace WebAPI.Controllers
             return await _dl.GetLeaderboardWinRate();
         }
 
-        [HttpPut("Winner/{winner}")]
-        public async Task UserWon(User winner)
-        {
-            await _dl.UserWon(winner);
-        }
+        // [HttpPut("Winner/{winner}")]
+        // public async Task UserWon(User winner)
+        // {
+        //     await _dl.UserWon(winner);
+        // }
 
         // [HttpDelete("DeleteUser/{user}")]
         // public async Task DeleteUserSession(User user)
@@ -52,19 +52,18 @@ namespace WebAPI.Controllers
         // }
 
 
-        [HttpPut("Loser/{loser}")]
-        public async Task UserLost(User loser)
-        {
-            await _dl.UserLost(loser);
+        // [HttpPut("Loser/{loser}")]
+        // public async Task UserLost(User loser)
+        // {
+        //     await _dl.UserLost(loser);
+        // }
+
+        [HttpPut("Match/{user}/{result}")]
+        public async Task MatchResult(User user, string result){
+            await _dl.MatchResult(user, result);
         }
-        // not sure if we can do this
-        [HttpPut("Tied/{players}")]
-        public async Task UserTied(List<User> players)
-        {
-            User p1 = players[0];
-            User p2 = players[1];
-            await _dl.UserTied(p1, p2);
-        }
+        
+
         [HttpPut("RemoveFromDex/{info}")]
         public async Task<List<Pokemon>> RemoveFromDex(Tuple<User, Pokemon> info)
         {
@@ -72,7 +71,7 @@ namespace WebAPI.Controllers
             Pokemon pokemon = info.Item2;
             return await _dl.RemoveFromDex(Player, pokemon);
         }
-        [HttpDelete("RemoveAllFromDex/{username}")]
+        [HttpDelete("RemoveAllFromDex/{player}")]
         public async Task RemoveAllFromDex(User player)
         {
             await _dl.RemoveAllFromDex(player);
@@ -83,13 +82,13 @@ namespace WebAPI.Controllers
             return await _dl.GetAllPokemonAsync();
         }
 
-        [HttpGet("GetUsersDex/{username}")]
-        public async Task<List<Pokemon>> GetUsersDex(User player)
+        [HttpGet("GetUsersDex/{player}")]
+        public async Task<List<Pokemon>> GetUsersDex([FromQuery] User player)
         {
             return await _dl.GetUsersDex(player);
         }
 
-        [HttpPost("AddToDex/{username}")]
+        [HttpPost("AddToDex/{info}")]
         public async Task AddToDex(Tuple<User, Pokemon> info)
         {
             User Player = info.Item1;
