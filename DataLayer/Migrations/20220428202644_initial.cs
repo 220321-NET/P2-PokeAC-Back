@@ -31,15 +31,8 @@ namespace DataLayer.Migrations
                     name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     hp = table.Column<int>(type: "int", nullable: false),
                     attack = table.Column<int>(type: "int", nullable: false),
-                    special = table.Column<int>(type: "int", nullable: false),
                     defense = table.Column<int>(type: "int", nullable: false),
-                    type1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    type2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    rarity = table.Column<int>(type: "int", nullable: false),
-                    childID = table.Column<int>(type: "int", nullable: false),
-                    parentID = table.Column<int>(type: "int", nullable: false),
-                    combatAI = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    specialAttack = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    type1 = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

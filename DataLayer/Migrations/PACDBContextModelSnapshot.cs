@@ -51,13 +51,6 @@ namespace DataLayer.Migrations
                     b.Property<int>("attack")
                         .HasColumnType("int");
 
-                    b.Property<int>("childID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("combatAI")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("defense")
                         .HasColumnType("int");
 
@@ -68,24 +61,7 @@ namespace DataLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("parentID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("rarity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("special")
-                        .HasColumnType("int");
-
-                    b.Property<string>("specialAttack")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("type1")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("type2")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
