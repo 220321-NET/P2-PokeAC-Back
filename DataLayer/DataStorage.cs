@@ -71,8 +71,8 @@ public class DataStorage : IRepo
     {
         List<Pokedex> tempDex = await _context.Pokedex
             .FromSqlRaw($"Select * from Pokedex where userId = {player.id}")
-            .ToListAsync();        
-            foreach (Pokedex p in tempDex)
+            .ToListAsync();
+        foreach (Pokedex p in tempDex)
         {
             //loop through to find the first one that matches the given player and pokemon id
             if (p.userId == player.id)
@@ -84,7 +84,7 @@ public class DataStorage : IRepo
     }
 
     public async Task<List<Pokemon>> RemoveFromDex(User player, Pokemon pokemon)
-    {   
+    {
         List<Pokedex> tempDex = await _context.Pokedex
             .FromSqlRaw($"Select * from Pokedex where userId = {player.id}")
             .ToListAsync();
@@ -98,11 +98,11 @@ public class DataStorage : IRepo
                 break;
             }
         }
-        
+
         tempDex = await _context.Pokedex
             .FromSqlRaw($"Select * from Pokedex where userId = {player.id}")
             .ToListAsync();
-        
+
         List<Pokemon> userDex = new List<Pokemon>();
         foreach (Pokedex p in tempDex)
         {
@@ -163,6 +163,13 @@ public class DataStorage : IRepo
         //throw new NotImplementedException();
     }
 
+    public async Task<Pokemon> getRandomPokemon()
+    {
+        List<Pokemon> randomList = await _context.Pokemon.ToListAsync();
+        var rdm = new Random();
+        Pokemon random = randomList[rdm.Next(randomList.Count)];
+        return random;
+    }
 
     /*
         me taking notes

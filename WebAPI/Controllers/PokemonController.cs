@@ -102,6 +102,10 @@ namespace WebAPI.Controllers
         {
             return await _dl.getPokemonInfo(pokemon);
         }
+        [HttpGet("getRandomPokemon")]
+        public async Task<Pokemon> getRandomPokemon(){
+            return await _dl.getRandomPokemon();
+        }
 
     }
 }

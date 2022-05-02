@@ -17,6 +17,7 @@ public interface IRepo
     Task<List<User>> GetLeaderboardWinRate();                       // Return win rate for leaderboard
     Task DeleteUserSession(User user);                              // unimplemented
     Task<Pokemon> getPokemonInfo(string pokemon);                   // given name, return Pokemon
+    Task<Pokemon> getRandomPokemon();
 }
 
 //Pokemon CreatePokemon(Pokemon pkmToCreate);

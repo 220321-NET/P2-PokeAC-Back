@@ -15,5 +15,6 @@ COPY --from=build /app/publish .
 
 CMD ["dotnet", "WebAPI.dll"]
 
-#docker build . -t chainofazns/PokeAC-Back:x.x  x being version num but w/e just take latest
-#docker run -p 5000:80 -d chainofazns/PokeAC-Back  this is for local stuff, try to remember how you tied it to azure and github some other time
+#docker build . -t chainofazns/pokeac-back:x.x  x being version num but w/e just take latest
+#docker run -p 5000:80 -d chainofazns/pokeac-back  this is for local stuff, try to remember how you tied it to azure and github some other time
+#docker push chainofazns/pokeac-back:latest
