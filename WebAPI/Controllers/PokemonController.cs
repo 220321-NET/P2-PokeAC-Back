@@ -60,10 +60,11 @@ namespace WebAPI.Controllers
         // }
 
         [HttpPut("Match/{user}/{result}")]
-        public async Task MatchResult(User user, string result){
+        public async Task MatchResult(User user, string result)
+        {
             await _dl.MatchResult(user, result);
         }
-        
+
 
         [HttpPut("RemoveFromDex/{info}")]
         public async Task<List<Pokemon>> RemoveFromDex(Tuple<User, Pokemon> info)
@@ -77,7 +78,7 @@ namespace WebAPI.Controllers
         {
             await _dl.RemoveAllFromDex(player);
         }
-        
+
         [HttpGet("GetAllPokemon")]
         public async Task<List<Pokemon>> GetAllPokemon()
         {
@@ -97,13 +98,14 @@ namespace WebAPI.Controllers
             Pokemon pokemon = info.Item2;
             await _dl.AddToDex(Player, pokemon);
         }
-        [HttpGet("getPokemonInfo/{pokemon}")]
+        [HttpGet("GetPokemonInfo/{pokemon}")]
         public async Task<Pokemon> getPokemonInfo(string pokemon)
         {
             return await _dl.getPokemonInfo(pokemon);
         }
-        [HttpGet("getRandomPokemon")]
-        public async Task<Pokemon> getRandomPokemon(){
+        [HttpGet("GetRandomPokemon")]
+        public async Task<Pokemon> getRandomPokemon()
+        {
             return await _dl.getRandomPokemon();
         }
 

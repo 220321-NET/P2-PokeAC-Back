@@ -24,7 +24,7 @@
 -- insert into pokemon values (69, 'Bellsprout', 5, 1, 0, 'grass')
 -- insert into pokemon values (147, 'Dratini', 5, 1, 0, 'dragon')
 -- insert into pokemon values (77, 'Ponyta', 5, 1, 0, 'fire')
--- insert into pokemon values (127, 'Pinser', 5, 1, 0, 'bug')
+-- insert into pokemon values (127, 'Pinsir', 5, 1, 0, 'bug')
 
 select * from pokemon order by type1;
 
