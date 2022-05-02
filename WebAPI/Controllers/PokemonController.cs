@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
 using DataLayer;
 using Models;
 
@@ -76,6 +77,7 @@ namespace WebAPI.Controllers
         {
             await _dl.RemoveAllFromDex(player);
         }
+        [DisableCors]
         [HttpGet("GetAllPokemon")]
         public async Task<List<Pokemon>> GetAllPokemon()
         {
