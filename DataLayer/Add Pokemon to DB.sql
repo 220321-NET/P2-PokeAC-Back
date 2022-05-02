@@ -28,3 +28,6 @@
 
 select * from pokemon order by type1;
 
+select * from users
+
+-- insert into Users(username, password, matches, wins, losses) VALUES ('bot', 'p@ssw0rd', 0 ,0,0)

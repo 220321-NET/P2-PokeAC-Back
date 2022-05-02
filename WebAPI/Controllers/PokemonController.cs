@@ -77,7 +77,7 @@ namespace WebAPI.Controllers
         {
             await _dl.RemoveAllFromDex(player);
         }
-        [DisableCors]
+        
         [HttpGet("GetAllPokemon")]
         public async Task<List<Pokemon>> GetAllPokemon()
         {
