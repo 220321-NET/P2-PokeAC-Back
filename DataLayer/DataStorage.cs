@@ -16,6 +16,13 @@ public class DataStorage : IRepo
         await _context.SaveChangesAsync();
 
     }
+    public User CreateUser(User userToCreate)
+    {
+        _context.Users!.Add(userToCreate);
+        _context.SaveChanges();
+        return userToCreate;
+    }
+    /*
     public async Task<User> CreateUser(User userToCreate)
     {
         _context.Users.Add(userToCreate);
@@ -23,7 +30,7 @@ public class DataStorage : IRepo
         return userToCreate;
 
     }
-
+    */
     public async Task<List<Pokemon>> GetAllPokemonAsync()
     {
         return await _context.Pokemon.ToListAsync();

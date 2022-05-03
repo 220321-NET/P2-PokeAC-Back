@@ -15,13 +15,18 @@ namespace WebAPI.Controllers
         {
             _dl = dl;
         }
-
+        [HttpPost("createUser")]
+        public void Post(User user)
+        {
+            _dl.CreateUser(user);
+        }
+        /*
         [HttpPost("CreateUser/{userToCreate}")]
         public async Task<User> Post([FromQuery] User userToCreate)
         {
             return await _dl.CreateUser(userToCreate);
         }
-
+        */
         [HttpGet("FindUser/{user}")]
         public async Task<User> GetUserAsync([FromQuery] User user)
         {

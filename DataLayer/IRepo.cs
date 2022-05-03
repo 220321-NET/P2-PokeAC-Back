@@ -3,7 +3,8 @@ namespace DataLayer;
 public interface IRepo
 {
     Task<User> getUserAsync(User userToGet);                           // login method
-    Task<User> CreateUser(User userToCreate);
+
+    public User CreateUser(User userToCreate);
     Task<List<Pokemon>> GetAllPokemonAsync();
     // Task UserWon(User winner);
     // Task UserLost(User loser);
