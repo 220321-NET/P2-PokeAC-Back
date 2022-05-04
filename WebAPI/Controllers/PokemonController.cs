@@ -15,6 +15,11 @@ namespace WebAPI.Controllers
         {
             _dl = dl;
         }
+        [HttpGet("GetUserByUsername/{usernameToTry}")]
+        public async Task<User> GetUserByUsername(string usernameToTry)
+        {
+            return await _dl.GetUserByUsernameAsync(usernameToTry);
+        }
         [HttpPost("createUser")]
         public void Post(User user)
         {
