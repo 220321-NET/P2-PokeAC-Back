@@ -45,7 +45,7 @@ public class DataStorage : IRepo
     public async Task<List<User>> GetLeaderboardWinRate()
     {
         return await _context.Users
-            .FromSqlRaw("Select * from Users Order By (wins *1.0) /(matches * 1.0) desc")
+            .FromSqlRaw("Select * from Users Where matches > 0 Order By (wins *1.0) /(matches * 1.0) desc")
             .ToListAsync();
     }
 
