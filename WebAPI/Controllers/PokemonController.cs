@@ -15,10 +15,12 @@ namespace WebAPI.Controllers
         {
             _dl = dl;
         }
+
         [HttpGet("GetUser/{usernameToTry}")]
         public User GetUserByUsername(string usernameToTry)
         {
             return _dl.GetUserByUsername(usernameToTry);
+
         }
         [HttpPost("createUser")]
         public void Post(User user)

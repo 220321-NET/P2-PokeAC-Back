@@ -16,10 +16,12 @@ public class DataStorage : IRepo
         await _context.SaveChangesAsync();
 
     }
+
     public User GetUserByUsername(string usernameToTry)
     {
         return _context.Users!.FirstOrDefault(user => user.username == usernameToTry)!;
     }
+
     public User CreateUser(User userToCreate)
     {
         _context.Users!.Add(userToCreate);
