@@ -16,9 +16,10 @@ public class DataStorage : IRepo
         await _context.SaveChangesAsync();
 
     }
-    public async Task<User> GetUserByUsernameAsync(string usernameToTry)
+
+    public User GetUserByUsername(string usernameToTry)
     {
-        return await _context.Users!.FirstOrDefaultAsync(user => user.username == usernameToTry)!;
+        return _context.Users!.FirstOrDefault(user => user.username == usernameToTry)!;
     }
 
     public User CreateUser(User userToCreate)
@@ -54,7 +55,6 @@ public class DataStorage : IRepo
             .FromSqlRaw("Select * from Users Order By wins desc")
             .ToListAsync();
     }
-
     public async Task<User> getUserAsync(User userToGet)
     {
         return await _context.Users.FirstOrDefaultAsync(user => userToGet.username == user.username && userToGet.password == user.password);
