@@ -15,7 +15,11 @@ namespace WebAPI.Controllers
         {
             _dl = dl;
         }
-
+        [HttpGet("UsernameTaken/{username}")]
+        public Boolean takenUsername(string username)
+        {
+            return _dl.takenUsername(username);
+        }
         [HttpGet("GetUser/{usernameToTry}")]
         public User GetUserByUsername(string usernameToTry)
         {
@@ -71,10 +75,10 @@ namespace WebAPI.Controllers
         //     await _dl.UserLost(loser);
         // }
 
-        [HttpPut("Match/{user}/{result}")]
-        public async Task MatchResult(User user, string result)
+        [HttpPut("Match/{result}")]
+        public async Task<User> MatchResult(User user, string result)
         {
-            await _dl.MatchResult(user, result);
+            return await _dl.MatchResult(user, result);
         }
 
 

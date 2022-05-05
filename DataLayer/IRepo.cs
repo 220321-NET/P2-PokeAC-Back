@@ -6,13 +6,13 @@ public interface IRepo
     Task<User> getUserAsync(User userToGet); 
     User GetUserByUsername(string usernameToTry);                           // login method
 
-
+    Boolean takenUsername(string username);
     public User CreateUser(User userToCreate);
     Task<List<Pokemon>> GetAllPokemonAsync();
     // Task UserWon(User winner);
     // Task UserLost(User loser);
     // Task UserTied(User player1, User player2);
-    Task MatchResult (User player, string result);
+    Task<User> MatchResult (User player, string result);
     Task AddToDex(User player, Pokemon pokemon);
     Task<List<Pokemon>> RemoveFromDex(User player, Pokemon pokemon);
     Task RemoveAllFromDex(User player);                             // 

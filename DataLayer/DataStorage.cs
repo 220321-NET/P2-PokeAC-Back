@@ -16,7 +16,9 @@ public class DataStorage : IRepo
         await _context.SaveChangesAsync();
 
     }
-
+    public Boolean takenUsername(string username){
+        return _context.Users.Any(user => user.username == username);
+    }
     public User GetUserByUsername(string usernameToTry)
     {
         return _context.Users!.FirstOrDefault(user => user.username == usernameToTry)!;
@@ -155,7 +157,7 @@ public class DataStorage : IRepo
         return await _context.Pokemon.FirstOrDefaultAsync(poke => poke.name == pokemon);
     }
 
-    public async Task MatchResult(User player, string result)
+    public async Task<User> MatchResult(User player, string result)
     {
         User temp = await _context.Users.FirstOrDefaultAsync(user => player.username == user.username && player.password == user.password);
         temp.matches++;
@@ -172,6 +174,7 @@ public class DataStorage : IRepo
         }
         _context.Users.Update(temp);
         await _context.SaveChangesAsync();
+        return temp;
         //throw new NotImplementedException();
     }
 
