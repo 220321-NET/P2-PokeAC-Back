@@ -81,7 +81,11 @@ namespace WebAPI.Controllers
             return await _dl.MatchResult(user, result);
         }
 
-
+        [HttpPost("Matches/{opponentId}/{result}")]
+        public async Task InsertIntoMatches(User player, int opponentId, string result){
+            await _dl.InsertIntoMatches(player, opponentId, result);
+        }
+        
         [HttpPut("RemoveFromDex/{info}")]
         public async Task<List<Pokemon>> RemoveFromDex(Tuple<User, Pokemon> info)
         {

@@ -13,6 +13,7 @@ public interface IRepo
     // Task UserLost(User loser);
     // Task UserTied(User player1, User player2);
     Task<User> MatchResult (User player, string result);
+    Task InsertIntoMatches(User player, int opponentId, string result);
     Task AddToDex(User player, Pokemon pokemon);
     Task<List<Pokemon>> RemoveFromDex(User player, Pokemon pokemon);
     Task RemoveAllFromDex(User player);                             // 

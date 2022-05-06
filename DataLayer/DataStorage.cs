@@ -146,6 +146,12 @@ public class DataStorage : IRepo
     //     _context.Users.Update(winner);
     //     await _context.SaveChangesAsync();
     // }
+    public async Task InsertIntoMatches(User player, int opponentId, string result){
+        Match match = new Match(player.id, opponentId, result);
+        _context.Matches.Add(match);
+        await _context.SaveChangesAsync();
+
+    }
 
     public async Task DeleteUserSession(User user)
     {
