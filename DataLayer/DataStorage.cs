@@ -16,7 +16,8 @@ public class DataStorage : IRepo
         await _context.SaveChangesAsync();
 
     }
-    public Boolean takenUsername(string username){
+    public Boolean takenUsername(string username)
+    {
         return _context.Users.Any(user => user.username == username);
     }
     public User GetUserByUsername(string usernameToTry)
@@ -30,15 +31,7 @@ public class DataStorage : IRepo
         _context.SaveChanges();
         return userToCreate;
     }
-    /*
-    public async Task<User> CreateUser(User userToCreate)
-    {
-        _context.Users.Add(userToCreate);
-        await _context.SaveChangesAsync();
-        return userToCreate;
 
-    }
-    */
     public async Task<List<Pokemon>> GetAllPokemonAsync()
     {
         return await _context.Pokemon.ToListAsync();
@@ -60,7 +53,6 @@ public class DataStorage : IRepo
     public async Task<User> getUserAsync(User userToGet)
     {
         return await _context.Users.FirstOrDefaultAsync(user => userToGet.username == user.username && userToGet.password == user.password);
-        //someone make sure this is right and when they do delete this comment
     }
 
     public async Task<List<Pokemon>> GetUsersDex(User player)
@@ -78,7 +70,6 @@ public class DataStorage : IRepo
             Console.WriteLine($"name : {p.name}");
         }
         return userDex;
-        //someone make sure this is right and when they do delete this comment
     }
 
     public async Task RemoveAllFromDex(User player)
@@ -88,7 +79,6 @@ public class DataStorage : IRepo
             .ToListAsync();
         foreach (Pokedex p in tempDex)
         {
-            //loop through to find the first one that matches the given player and pokemon id
             if (p.userId == player.id)
             {
                 _context.Remove(p);
@@ -104,7 +94,6 @@ public class DataStorage : IRepo
             .ToListAsync();
         foreach (Pokedex p in tempDex)
         {
-            //loop through to find the firs tone that matches the given player and pokemon id
             if (p.userId == player.id && p.pokeID == pokemon.id)
             {
                 _context.Remove(p);
@@ -125,28 +114,8 @@ public class DataStorage : IRepo
         return userDex;
     }
 
-    // Removed in favor of one method
-    // public async Task UserLost(User loser)
-    // {
-    //     _context.Users.Update(loser);
-    //     await _context.SaveChangesAsync();
-    // }
-
-    // public async Task UserTied(User player1, User player2)
-    // {
-    //     _context.Users.Update(player1);
-    //     _context.Users.Update(player2);
-    //     await _context.SaveChangesAsync();
-    // }
-
-
-
-    // public async Task UserWon(User winner)
-    // {
-    //     _context.Users.Update(winner);
-    //     await _context.SaveChangesAsync();
-    // }
-    public async Task InsertIntoMatches(User player, int opponentId, string result){
+    public async Task InsertIntoMatches(User player, int opponentId, string result)
+    {
         Match match = new Match(player.id, opponentId, result);
         _context.Matches.Add(match);
         await _context.SaveChangesAsync();
@@ -181,7 +150,6 @@ public class DataStorage : IRepo
         _context.Users.Update(temp);
         await _context.SaveChangesAsync();
         return temp;
-        //throw new NotImplementedException();
     }
 
     public async Task<Pokemon> getRandomPokemon()
@@ -191,30 +159,4 @@ public class DataStorage : IRepo
         Pokemon random = randomList[rdm.Next(randomList.Count)];
         return random;
     }
-
-    /*
-        me taking notes
-        this is how you add a user
-        pub user add(user)
-        _context.User.Add(user);
-        _context.SaveChanges();
-        return user;
-    
-        pub List<user> getalluser
-        return _context.Users.ToListAsync();
-
-        p user getuser(int user.id)
-        _context.User.FirstOrDefault(user => user.id == id);
-
-        p List<pokemon> searchtype(string type)
-        return _context.Pokemon.Where(pokemon => pokemon.Type1.ToLower().Contains(type)).ToListAsync();
-
-        p void updateScore(user)
-        _cntext.user.update(user)
-        _context.savechanges
-
-        joins
-        return _context.Issues.Include("Answers").ToList();
-
-    */
 }

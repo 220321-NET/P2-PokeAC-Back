@@ -10,8 +10,8 @@ public class PACDBContext : DbContext
     public PACDBContext(DbContextOptions options) : base(options) { }
     public DbSet<User> Users { get; set; }
     public DbSet<Pokemon> Pokemon { get; set; }
-    public DbSet<Pokedex> Pokedex{ get; set; }
-    public DbSet<Match> Matches {get; set;}
+    public DbSet<Pokedex> Pokedex { get; set; }
+    public DbSet<Match> Matches { get; set; }
 }
 
 

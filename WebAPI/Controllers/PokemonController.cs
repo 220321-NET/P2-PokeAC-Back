@@ -31,13 +31,6 @@ namespace WebAPI.Controllers
         {
             _dl.CreateUser(user);
         }
-        /*
-        [HttpPost("CreateUser/{userToCreate}")]
-        public async Task<User> Post([FromQuery] User userToCreate)
-        {
-            return await _dl.CreateUser(userToCreate);
-        }
-        */
         [HttpGet("FindUser/{user}")]
         public async Task<User> GetUserAsync([FromQuery] User user)
         {
@@ -55,26 +48,6 @@ namespace WebAPI.Controllers
         {
             return await _dl.GetLeaderboardWinRate();
         }
-
-        // [HttpPut("Winner/{winner}")]
-        // public async Task UserWon(User winner)
-        // {
-        //     await _dl.UserWon(winner);
-        // }
-
-        // [HttpDelete("DeleteUser/{user}")]
-        // public async Task DeleteUserSession(User user)
-        // {
-        //     await _dl.DeleteUserSession(user);
-        // }
-
-
-        // [HttpPut("Loser/{loser}")]
-        // public async Task UserLost(User loser)
-        // {
-        //     await _dl.UserLost(loser);
-        // }
-
         [HttpPut("Match/{result}")]
         public async Task<User> MatchResult(User user, string result)
         {
@@ -82,10 +55,11 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("Matches/{opponentId}/{result}")]
-        public async Task InsertIntoMatches(User player, int opponentId, string result){
+        public async Task InsertIntoMatches(User player, int opponentId, string result)
+        {
             await _dl.InsertIntoMatches(player, opponentId, result);
         }
-        
+
         [HttpPut("RemoveFromDex/{info}")]
         public async Task<List<Pokemon>> RemoveFromDex(Tuple<User, Pokemon> info)
         {

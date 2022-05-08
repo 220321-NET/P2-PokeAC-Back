@@ -26,8 +26,24 @@
 -- insert into pokemon values (77, 'Ponyta', 5, 1, 0, 'fire')
 -- insert into pokemon values (127, 'Pinsir', 5, 1, 0, 'bug')
 
+-- insert into pokemon values (607, 'Litwick', 5, 1, 0, 'ghost')
+-- insert into pokemon values (667, 'LitLeo', 5, 1, 0, 'fire')
+-- insert into pokemon values (289, 'Slakoth', 5, 1, 0, 'normal')
+-- insert into pokemon values (74, 'Geodude', 5, 1, 0, 'rock')
+-- insert into pokemon values (302, 'Sableye', 5, 1, 0, 'dark')
+
+-- insert into pokemon values (39, 'Jigglypuff', 5, 1, 0, 'fairy')
+-- insert into pokemon values (132, 'Ditto', 5, 1, 0, 'normal')
+-- insert into pokemon values (359, 'Absol', 5, 1, 0, 'dark')
+-- insert into pokemon values (175, 'Togepi', 5, 1, 0, 'fairy')
+-- insert into pokemon values (235, 'Smeargle', 5, 1, 0, 'normal')
+
+
 select * from pokemon order by type1;
 
 select * from users
+select * from Matches
+Select * from Users Where matches > 0 Order By (wins *1.0) /(matches * 1.0) desc
 
 -- insert into Users(username, password, matches, wins, losses) VALUES ('bot', 'p@ssw0rd', 0 ,0,0)
+-- insert into Users(username, password, matches, wins, losses) VALUES ('guest', 'p@ssw0rd', 0 ,0,0)
